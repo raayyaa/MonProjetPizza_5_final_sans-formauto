@@ -1,0 +1,79 @@
+
+{%  extends "base.html.twig" %}
+
+
+{%  block content %}
+ 
+<div class='container'>
+
+
+
+	         
+	         <div class='col-sm-4 col-md-4'>
+
+                 <form name="monform" action="{{ path('newPizza') }}" method="POST" enctype="multipart/form-data">
+
+                     <div class="form-group">
+                           <img id="visuimg" src={{ asset('images/') }}resto.jpg>
+                         <input class="form-control" type="file" name="photoupload" id="photo">
+                         <a class=' btn btn-warning' id="visu" value="{{ path('visu') }}"> visualisez l'image</a>
+                     </div>
+
+                     <div class='description'>
+                         <div class="form-group">
+                             <label>Désignation :</label>
+                             <input type="text" class="form-control" name="designation" id="designation"
+                                    value="">
+
+                             <p><label>Tarif (euros):</label>
+                                 <input type="text" class="form-control" name="tarif" id="tarif"
+                                        value="">
+                             </p>
+
+                             <input class="btn btn-primary" type="submit" value="créer dans la base">
+                             <a class=' btn btn-info' href={{ path("pizza") }} >retour liste Pizza</a>
+                             <p></p>
+
+
+                         </div>
+
+                     </div>
+
+ 
+</div>
+
+{%  endblock  %}
+
+{% block javascripts %}
+    <script>
+        $(document).ready(function(){
+            console.log("Script working properly");
+
+
+
+        $("#visu").on('click',(function(e) {
+
+            e.preventDefault();
+            formData = new FormData(monform);
+            monurl= $("#visu").attr("value");
+            alert(monurl);
+		    $.ajax({
+        		url:  monurl,
+				type: "POST",
+				data:  formData,
+				contentType: false,
+    	    	cache: false,
+				processData:false,
+				success: function(data)
+		    			{   alert(data);
+							$("#visuimg").attr("src", "images/"+ data);
+		    			},
+		  		error: function()
+	    		{
+	    			alert( "pb avec ajax");
+	    		}
+	        });
+	    }));
+    });
+    </script>
+{% endblock %}

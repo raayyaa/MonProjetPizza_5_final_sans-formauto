@@ -1,0 +1,32 @@
+
+{%  extends "base.html.twig" %}
+
+
+{%  block content %}
+ 
+<div class='container'>
+
+
+
+	         
+	         <div class='col-sm-4 col-md-4'>
+             <img src='../images/{{ maPizza.id}}.jpg'>
+             <img src=  {{asset('images/')}}{{ maPizza.id}}.jpg>
+
+
+                <div class='description'>
+               <h2><b>{{ maPizza.designationPizza}}</b></h2>
+               <p><u>Prix :</u> {{ maPizza.tarifpizza}} euros</p>
+
+                <a class='btn btn-info' href={{ path("modifOnePizza", { 'id': maPizza.id}) }}>Modifier</a>
+                <a class='btn btn-info' href='deletePizza.php?numPizza={{ maPizza.id}}'>Supprimer</a>
+
+                    <a class=' btn btn-info' href={{ path("pizza") }} >retour liste Pizza</a>
+               </div>
+            </div>
+
+ 
+</div>
+
+{%  endblock  %}
+ 

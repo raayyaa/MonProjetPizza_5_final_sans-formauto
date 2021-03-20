@@ -1,0 +1,45 @@
+
+{%  extends "base.html.twig" %}
+
+
+{%  block content %}
+ 
+<div class='container'>
+
+
+
+	         
+	         <div class='col-sm-4 col-md-4'>
+
+                 <form action="{{ path('newPizza') }}" method="POST" enctype="multipart/form-data">
+
+                     <div class="form-group">
+                           <img src={{ asset('images/') }}resto.jpg>
+                         <input class="form-control" type="file" name="photo" id="photo">
+                     </div>
+
+                     <div class='description'>
+                         <div class="form-group">
+                             <label>Désignation :</label>
+                             <input type="text" class="form-control" name="designation" id="designation"
+                                    value="">
+
+                             <p><label>Tarif (euros):</label>
+                                 <input type="text" class="form-control" name="tarif" id="tarif"
+                                        value="">
+                             </p>
+
+                             <input class="btn btn-primary" type="submit" value="créer dans la base">
+                             <a class=' btn btn-info' href={{ path("pizza") }} >retour liste Pizza</a>
+                             <p></p>
+
+
+                         </div>
+
+                     </div>
+
+ 
+</div>
+
+{%  endblock  %}
+ 

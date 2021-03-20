@@ -1,0 +1,85 @@
+{% extends "base.html.twig" %}
+
+
+{% block content %}
+
+
+    <div class='container'>
+
+
+        <div class='col-sm-4 col-md-4'>
+            <form name="monform" action="{{ path('updateOnePizza', { 'id': maPizza.id}) }}" method="POST" enctype="multipart/form-data">
+
+                <div class="form-group">
+                    <img id="visuimg1" src='../../images/{{ maPizza.id}}.jpg'>
+                    <img id="visuimg2" src={{ asset('images/') }}{{ maPizza.id }}.jpg>
+                    <input class="form-control" type="file" name="imageUpload" id="photo">
+                    <a class='btn btn-warning' id="visu" value={{ path("visupload", { 'id': maPizza.id}) }}>uploader et visualiser l'image</a>
+                </div>
+
+                <div class='description'>
+                    <div class="form-group">
+                        <label>Désignation :</label>
+                        <input type="text" class="form-control" name="designation" id="designation"
+                               value="{{ maPizza.designationpizza }}">
+
+                        <p><label>Tarif (euros):</label>
+                            <input type="text" class="form-control" name="tarif" id="tarif"
+                                   value="{{ maPizza.tarifpizza }}">
+                        </p>
+
+                        <input class="btn btn-primary" type="submit" value="Modifier dans la base">
+                        <a class=' btn btn-info' href={{ path("pizza") }} >retour liste Pizza</a>
+                        <p></p>
+
+
+                    </div>
+
+            </form>
+        </div>
+
+
+    </div>
+
+
+{% endblock %}
+
+
+{% block javascripts %}
+    <script>
+        $(document).ready(function(){
+            console.log("Script working properly");
+
+
+            $("#visu").on('click',(function(e) {
+                $("#visuimg2").attr("src","");
+                $("#visuimg1").attr("src","");
+
+                e.preventDefault();
+                formData = new FormData(monform);
+                monurl= $("#visu").attr("value");
+                alert(monurl);
+                $.ajax({
+                    url:  monurl,
+                    type: "POST",
+                    data:  formData,
+                    contentType: false,
+                    cache: false,
+                    processData:false,
+                    success: function(data)
+                    {   alert(data);
+                         alert("../../images/" + data);
+                         im="../../images/" + data;
+                        $("#visuimg1").attr("src", "../../images/2.jpg");
+
+                        $("#visuimg2").attr("src",im);
+                    },
+                    error: function()
+                    {
+                        alert( "pb avec ajax");
+                    }
+                });
+            }));
+        });
+    </script>
+{% endblock %}

@@ -1,0 +1,30 @@
+{% extends "base.html.twig" %}
+
+
+{% block content %}
+
+
+    <div class='container'>
+
+        {% for pizza in tablopizza %}
+
+
+            <div class='col-sm-4 col-md-4'>
+
+                <img src='./images/{{ pizza.id }}.jpg'>
+
+                <div class='description'>
+                    <h2><b>{{ pizza.designationPizza }}</b></h2>
+                    <p><u>Prix :</u> {{ pizza.tarifPizza }} euros</p>
+
+                    <a class='btn btn-info' href={{ path("modifOnePizza", { 'id': pizza.id}) }}>Modifier</a>
+                    <a class='btn btn-info' href={{ path("deleteOnePizza", { 'id': pizza.id}) }}>Supprimer</a>
+                    <a class='btn btn-info' href='pizza/{{ pizza.id }}'>Editer</a>
+                </div>
+            </div>
+        {% endfor %}
+
+    </div>
+
+{% endblock %}
+
